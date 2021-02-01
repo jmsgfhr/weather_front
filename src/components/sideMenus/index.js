@@ -59,10 +59,6 @@ const Img = styled.img`
 `;
 
 const SideMenu = () => {
-
-  const history = useHistory();
-
-
   return (
     <SideMenuUser>
       <ItensSideMenu as={Link} to="/">

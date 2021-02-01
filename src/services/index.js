@@ -8,12 +8,6 @@ const api = axios.create({
   baseURL: URL,
 });
 
-const config = {
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
-};
-
 export const registerUser = (User, _callback) => {
   api
     .post(`/patients`, User)
