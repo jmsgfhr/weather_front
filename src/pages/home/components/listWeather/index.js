@@ -52,11 +52,13 @@ const SearchBar = styled.input`
 const ListWeather = () => {
   const [weatherList, setWeatherList] = useState("");
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [cityName, setCityName] = React.useState("");
   const history = useHistory();
 
   const handle = (e) => {
     if (e.key === 'Enter') {
       Cities(searchTerm, (response) => {
+        setCityName(response.data[0].name);
         Weather(response.data[0].lat, response.data[0].lon, (resp) => {
           setWeatherList(Array.from(resp.data.daily));
         });
@@ -76,17 +78,29 @@ const ListWeather = () => {
     return `${day}/${month}/${year}`;
   };
 
+
   return (
     <AlignContent>
       <SearchBar onChange={editSearchTerm} onKeyPress={handle} placeholder="Pesquisar Cidade" />
 
       {weatherList.length !== 0 ? (
         weatherList.map((eachWeather) => (
-          < Card /* key={weatherList.id} */ >
+          < Card key={eachWeather.dt} >
             <Text>Dia: {datePicker(eachWeather.dt)}</Text>
+            <Text>Temp min: {eachWeather.temp.min}°C</Text>
+            <Text>Temp max: {eachWeather.temp.max}°C</Text>
             <ButtonSizeCard>
-              <ButtonPage>
-                Selecionar
+              <ButtonPage
+                onClick={() => {
+                  console.log(eachWeather)
+                  eachWeather.city = cityName;
+                  history.push({
+                    pathname: '/detalhesTempo',
+                    state: { detail: eachWeather }
+                  })
+                }}
+              >
+                Detalhes
               </ButtonPage>
             </ButtonSizeCard>
           </Card>

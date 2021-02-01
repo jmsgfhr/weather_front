@@ -4,11 +4,13 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./assets/css/reset.css";
 import Home from "./pages/home/index";
+import WeatherDetails from "./pages/detalhesTempo/index";
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path={"/"} component={Home} exact />
+      <Route path={"/detalhesTempo"} component={WeatherDetails} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

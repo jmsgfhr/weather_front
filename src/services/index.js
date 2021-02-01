@@ -30,7 +30,7 @@ export const Cities = (name,_callback) => {
 
 export const Weather = (lat,lon,_callback) => {
   api
-    .get(`/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${ApiKey}`)
+    .get(`/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&lang=pt_br&appid=${ApiKey}`)
     .then(_callback)
     .catch((err) => {
       _callback(err.response);
