@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://api.openweathermap.org";
+const URL = "https://api.openweathermap.org";
 
 const ApiKey = "f6e8db89a8fa901c9b06fcda2b81b8d1";
 
