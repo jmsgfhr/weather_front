@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Relogio from "../../assets/imgs/incosSideMenus/relogio.svg";
 import Sol from "../../assets/imgs/incosSideMenus/sun.svg";
 import "../../constants/colors.css";
