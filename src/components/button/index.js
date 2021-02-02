@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import "../../constants/colors.css";
+import styled from 'styled-components';
+import '../../constants/colors.css';
 
 export const Button = styled.button`
   background-color: var(--primary-blue);

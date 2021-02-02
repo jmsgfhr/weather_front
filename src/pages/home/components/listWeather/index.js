@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { AlignContent } from "../../../../constants/containers/index";
-import { Text } from "../../../../components/texts";
-import ButtonPage from "../../../../components/button/index";
-import styled from "styled-components";
-import { Cities, Weather } from "../../../../services/index";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import { AlignContent } from '../../../../constants/containers/index';
+import { Text } from '../../../../components/texts';
+import ButtonPage from '../../../../components/button/index';
+import { Cities, Weather } from '../../../../services/index';
 
 const Card = styled.div`
   width: 70%;
@@ -50,14 +50,14 @@ const SearchBar = styled.input`
 `;
 
 const ListWeather = () => {
-  const [weatherList, setWeatherList] = useState("");
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [cityName, setCityName] = React.useState("");
+  const [weatherList, setWeatherList] = useState('');
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [cityName, setCityName] = React.useState('');
   const history = useHistory();
 
   const handle = (e) => {
     if (e.key === 'Enter') {
-      e.target.value="";
+      e.target.value = '';
       Cities(searchTerm, (response) => {
         setCityName(response.data[0].name);
         Weather(response.data[0].lat, response.data[0].lon, (resp) => {
@@ -65,20 +65,19 @@ const ListWeather = () => {
         });
       });
     }
-  }
+  };
 
   const editSearchTerm = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const datePicker = (date) => {
-    var a = new Date(date * 1000);
-    var year = a.getFullYear();
-    var month = a.getMonth() + 1;
-    var day = a.getDate();
+    const a = new Date(date * 1000);
+    const year = a.getFullYear();
+    const month = a.getMonth() + 1;
+    const day = a.getDate();
     return `${day}/${month}/${year}`;
   };
-
 
   return (
     <AlignContent>
@@ -86,36 +85,46 @@ const ListWeather = () => {
 
       {weatherList.length !== 0 ? (
         <>
-          <Text style={{ marginBottom: "25px", fontSize: "3rem" }}>{cityName}</Text>
+          <Text style={{ marginBottom: '25px', fontSize: '3rem' }}>{cityName}</Text>
           {weatherList.map((eachWeather) => (
-            < Card key={eachWeather.dt} >
-              <Text>Dia: {datePicker(eachWeather.dt)}</Text>
-              <Text>Temp min: {eachWeather.temp.min}°C</Text>
-              <Text>Temp max: {eachWeather.temp.max}°C</Text>
+            <Card key={eachWeather.dt}>
+              <Text>
+                Dia:
+                {datePicker(eachWeather.dt)}
+              </Text>
+              <Text>
+                Temp min:
+                {eachWeather.temp.min}
+                °C
+              </Text>
+              <Text>
+                Temp max:
+                {eachWeather.temp.max}
+                °C
+              </Text>
               <ButtonSizeCard>
                 <ButtonPage
                   onClick={() => {
+                    // eslint-disable-next-line no-param-reassign
                     eachWeather.city = cityName;
                     history.push({
                       pathname: '/detalhesTempo',
-                      state: { detail: eachWeather }
-                    })
+                      state: { detail: eachWeather },
+                    });
                   }}
                 >
                   Detalhes
-              </ButtonPage>
+                </ButtonPage>
               </ButtonSizeCard>
             </Card>
-          )
-          )}
+          ))}
         </>
       ) : (
-          <div style={{ width: "45%" }}>
-            <ButtonPage onClick={() => history.push("/historico")}>Visualizar Histórico</ButtonPage>
-          </div>
-        )
-      }
-    </AlignContent >
+        <div style={{ width: '45%' }}>
+          <ButtonPage onClick={() => history.push('/historico')}>Visualizar Histórico</ButtonPage>
+        </div>
+      )}
+    </AlignContent>
   );
 };
 

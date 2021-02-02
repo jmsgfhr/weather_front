@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import Arrow from "../../assets/imgs/arrows/leftArrow";
-import "./style.css";
-import RightArrow from "../../assets/imgs/arrows/rigthArrow";
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+import React, { useState } from 'react';
+import Arrow from '../../assets/imgs/arrows/leftArrow';
+import './style.css';
+import RightArrow from '../../assets/imgs/arrows/rigthArrow';
 
 const Pagination = (props) => {
   const LengthList = props.size;
@@ -9,23 +13,24 @@ const Pagination = (props) => {
   const [inicialBegin, setInicialBegin] = useState(0);
   const [inicialEnd, setInicialEnd] = useState(3);
 
+  // eslint-disable-next-line no-plusplus
   for (let i = 1; i <= LengthList; i++) {
     pageNumbers.push(i);
   }
 
   const setArrow = (dir) => {
-    if (dir === "left" && inicialBegin >= 1) {
-      let newBegin = inicialBegin - 1;
-      let newEnd = newBegin + 3;
+    if (dir === 'left' && inicialBegin >= 1) {
+      const newBegin = inicialBegin - 1;
+      const newEnd = newBegin + 3;
 
       setInicialBegin(newBegin);
       setInicialEnd(newEnd);
     } else if (
-      dir === "right" &&
-      inicialEnd < pageNumbers[pageNumbers.length - 1]
+      dir === 'right'
+      && inicialEnd < pageNumbers[pageNumbers.length - 1]
     ) {
-      let newBegin = inicialBegin + 1;
-      let newEnd = newBegin + 3;
+      const newBegin = inicialBegin + 1;
+      const newEnd = newBegin + 3;
 
       setInicialBegin(newBegin);
       setInicialEnd(newEnd);
@@ -35,8 +40,8 @@ const Pagination = (props) => {
     <div className="pagination">
       <div
         onClick={() => {
-          props.arrowfunction("left");
-          setArrow("left");
+          props.arrowfunction('left');
+          setArrow('left');
         }}
         className="arrows"
       >
@@ -94,8 +99,8 @@ const Pagination = (props) => {
       </ul>
       <div
         onClick={() => {
-          props.arrowfunction("right");
-          setArrow("right");
+          props.arrowfunction('right');
+          setArrow('right');
         }}
         className="arrows"
       >

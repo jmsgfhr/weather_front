@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import "../../constants/colors.css";
+import styled from 'styled-components';
+import '../../constants/colors.css';
 
 export const H1sistem = styled.h1`
   font-family: "Roboto Condensed";

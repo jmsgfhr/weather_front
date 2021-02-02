@@ -1,7 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import "../../constants/colors.css";
-import PropTypes from "prop-types";
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable react/require-default-props */
+import React from 'react';
+import styled from 'styled-components';
+import '../../constants/colors.css';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
 
 const Input = styled.input`
   background-color: var(--second-gray);
@@ -16,17 +19,15 @@ const Input = styled.input`
   top: 15%;
 `;
 
-const SearchBar = (onChange, type, name, placeholder, value) => {
-  return (
-    <Input
-      onChange={onChange}
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-    />
-  );
-};
+const SearchBar = (onChange, type, name, placeholder, value) => (
+  <Input
+    onChange={onChange}
+    type={type}
+    name={name}
+    placeholder={placeholder}
+    value={value}
+  />
+);
 
 SearchBar.propTypes = {
   type: PropTypes.string,

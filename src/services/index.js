@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-const URL = "https://api.openweathermap.org";
+const URL = 'https://api.openweathermap.org';
 
-const urldjango = "http://localhost:8000";
+const urldjango = 'http://localhost:8000';
 
-const ApiKey = "f6e8db89a8fa901c9b06fcda2b81b8d1";
+const ApiKey = 'f6e8db89a8fa901c9b06fcda2b81b8d1';
 
 const api = axios.create({
   baseURL: URL,
@@ -16,7 +16,7 @@ const apidjango = axios.create({
 
 export const historyWeather = (_callback) => {
   apidjango
-    .get(`/weathers/`)
+    .get('/weathers/')
     .then((response) => {
       _callback(response);
     })
@@ -27,7 +27,7 @@ export const historyWeather = (_callback) => {
 
 export const historyPost = (post, _callback) => {
   apidjango
-    .post(`/weathers/`, post)
+    .post('/weathers/', post)
     .then((response) => {
       _callback(response);
     })

@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
+import { Accordion, AccordionSummary, Typography } from '@material-ui/core';
+import styled from 'styled-components';
 import {
   ListCardContainer,
   AlignContent,
-} from "../../../../constants/containers/index";
-import { TextCard } from "../../../../components/texts/index";
-import { Accordion, AccordionSummary, Typography } from "@material-ui/core";
-import styled from "styled-components";
-import "../../../../constants/colors.css";
-import Pagination from "../../../../components/pagination/index";
+} from '../../../../constants/containers/index';
+import { TextCard } from '../../../../components/texts/index';
+import '../../../../constants/colors.css';
+import Pagination from '../../../../components/pagination/index';
 
 const SizeAccordion = styled.div`
   width: 50%;
@@ -26,8 +27,8 @@ const EachElement = styled.div`
   border-bottom: 2px solid gray;
 `;
 
-
 const ContentHistory = (props) => {
+  // eslint-disable-next-line react/destructuring-assignment
   const vector = props.HistoryWeather;
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 8;
@@ -41,23 +42,23 @@ const ContentHistory = (props) => {
   };
 
   const arrowClick = (dir) => {
-    if (dir === "left" && currentPage > 1) {
+    if (dir === 'left' && currentPage > 1) {
       setCurrentPage(currentPage - 1);
-    } else if (dir === "right" && currentPage <= itemsCeil - 1) {
+    } else if (dir === 'right' && currentPage <= itemsCeil - 1) {
       setCurrentPage(currentPage + 1);
     }
   };
 
   const datePicker = (date) => {
-    var a = new Date(date * 1000);
-    var year = a.getFullYear();
-    var month = a.getMonth() + 1;
-    var day = a.getDate();
+    const a = new Date(date * 1000);
+    const year = a.getFullYear();
+    const month = a.getMonth() + 1;
+    const day = a.getDate();
     return `${day}/${month}/${year}`;
   };
 
   return (
-    <React.Fragment>
+    <>
       <ListCardContainer id="seuhistorico">
         <AlignContent>
           {currentHistories.map((eachHistory) => (
@@ -69,9 +70,9 @@ const ContentHistory = (props) => {
                 >
                   <Typography
                     style={{
-                      fontWeight: "bold",
-                      fontFamily: "Roboto Condensed",
-                      fontSize: "1.5em",
+                      fontWeight: 'bold',
+                      fontFamily: 'Roboto Condensed',
+                      fontSize: '1.5em',
                     }}
                   >
                     {`${eachHistory.city} ${datePicker(eachHistory.dt)}`}
@@ -84,34 +85,85 @@ const ContentHistory = (props) => {
                   </EachElement>
 
                   <EachElement>
-                    <TextCard>Probabilidade de Chuva: {eachHistory.pop}%</TextCard>
+                    <TextCard>
+                      Probabilidade de Chuva:
+                      {eachHistory.pop}
+                      %
+                    </TextCard>
                     <TextCard>{eachHistory.rain && `Quantidade de Chuva: ${eachHistory.rain} mm`}</TextCard>
 
-                    {eachHistory.snow &&
-                      <TextCard>Quantidade de Neve: {eachHistory.snow} mm</TextCard>
-                    }
+                    {eachHistory.snow
+                      && (
+                      <TextCard>
+                        Quantidade de Neve:
+                        {eachHistory.snow}
+                        {' '}
+                        mm
+                      </TextCard>
+                      )}
                   </EachElement>
 
                   <EachElement>
-                    <TextCard>Temperatura Min: {eachHistory.minDayTemp}°C</TextCard>
-                    <TextCard>Temperatura Max: {eachHistory.maxDayTemp}°C</TextCard>
-                    <TextCard>Temperatura de Dia: {eachHistory.dayTemp}°C</TextCard>
-                    <TextCard>Temperatura de Noite: {eachHistory.nightTemp}°C</TextCard>
+                    <TextCard>
+                      Temperatura Min:
+                      {eachHistory.minDayTemp}
+                      °C
+                    </TextCard>
+                    <TextCard>
+                      Temperatura Max:
+                      {eachHistory.maxDayTemp}
+                      °C
+                    </TextCard>
+                    <TextCard>
+                      Temperatura de Dia:
+                      {eachHistory.dayTemp}
+                      °C
+                    </TextCard>
+                    <TextCard>
+                      Temperatura de Noite:
+                      {eachHistory.nightTemp}
+                      °C
+                    </TextCard>
                   </EachElement>
 
                   <EachElement>
-                    <TextCard>Sensação Térmica de Dia: {eachHistory.dayFeel}°C</TextCard>
-                    <TextCard>Sensação Térmica de Noite: {eachHistory.nightFeel}°C</TextCard>
+                    <TextCard>
+                      Sensação Térmica de Dia:
+                      {eachHistory.dayFeel}
+                      °C
+                    </TextCard>
+                    <TextCard>
+                      Sensação Térmica de Noite:
+                      {eachHistory.nightFeel}
+                      °C
+                    </TextCard>
                   </EachElement>
 
                   <EachElement>
-                    <TextCard>Pressão: {eachHistory.pressure} hPa</TextCard>
-                    <TextCard>Humidade: {eachHistory.humidity}%</TextCard>
+                    <TextCard>
+                      Pressão:
+                      {eachHistory.pressure}
+                      {' '}
+                      hPa
+                    </TextCard>
+                    <TextCard>
+                      Humidade:
+                      {eachHistory.humidity}
+                      %
+                    </TextCard>
                   </EachElement>
 
                   <EachElement>
-                    <TextCard>Velocidade do Vento: {eachHistory.wind_speed}m/s</TextCard>
-                    <TextCard>Direção do Vento: {eachHistory.wind_deg}°</TextCard>
+                    <TextCard>
+                      Velocidade do Vento:
+                      {eachHistory.wind_speed}
+                      m/s
+                    </TextCard>
+                    <TextCard>
+                      Direção do Vento:
+                      {eachHistory.wind_deg}
+                      °
+                    </TextCard>
                   </EachElement>
 
                 </ContentAccordion>
@@ -127,10 +179,8 @@ const ContentHistory = (props) => {
         onItemClick={paginationClick}
         href="#seuhistorico"
       />
-    </React.Fragment>
+    </>
   );
 };
-
-
 
 export default ContentHistory;

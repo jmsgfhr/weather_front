@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const MainContainer = styled.div`
   max-width: 1024px;
@@ -64,8 +64,8 @@ export const AlignContentHistory = styled.div`
 // {index: {"name": "<nomeMedicao>", "unit": "<unidadeMedicao>"}}
 // o ideal é usar um json em um arquivo para manter consistencia entre frontend e backend
 export const MeasurementsDict = {
-  1: { "name": "Pressao Arterial", "unit": "" },
-  2: { "name": "Frequencia Cardiaca", "unit": "cm" },
-  3: { "name": "Circunferencia Abdominal", "unit": "cm" },
-  4: { "name": "Passos por dia", "unit": "" },
-}
+  1: { name: 'Pressao Arterial', unit: '' },
+  2: { name: 'Frequencia Cardiaca', unit: 'cm' },
+  3: { name: 'Circunferencia Abdominal', unit: 'cm' },
+  4: { name: 'Passos por dia', unit: '' },
+};

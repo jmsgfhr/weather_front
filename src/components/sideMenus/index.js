@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import Relogio from "../../assets/imgs/incosSideMenus/relogio.svg";
-import Sol from "../../assets/imgs/incosSideMenus/sun.svg";
-import "../../constants/colors.css";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import Relogio from '../../assets/imgs/incosSideMenus/relogio.svg';
+import Sol from '../../assets/imgs/incosSideMenus/sun.svg';
+import '../../constants/colors.css';
 
 const SideMenuUser = styled.div`
   width: 110px;
@@ -58,17 +58,15 @@ const Img = styled.img`
   }
 `;
 
-const SideMenu = () => {
-  return (
-    <SideMenuUser>
-      <ItensSideMenu as={Link} to="/">
-        <Img src={Sol} />
-      </ItensSideMenu>
-      <ItensSideMenu as={Link} to="/historico">
-        <Img src={Relogio} />
-      </ItensSideMenu>
-    </SideMenuUser>
-  );
-};
+const SideMenu = () => (
+  <SideMenuUser>
+    <ItensSideMenu as={Link} to="/">
+      <Img src={Sol} />
+    </ItensSideMenu>
+    <ItensSideMenu as={Link} to="/historico">
+      <Img src={Relogio} />
+    </ItensSideMenu>
+  </SideMenuUser>
+);
 
 export default SideMenu;
