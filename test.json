@@ -1,36 +1,17 @@
 {
-    "dt": 1612191600,
-    "sunrise": 1612168374,
-    "sunset": 1612215594,
-    "temp": {
-        "day": 305.06,
-        "min": 299.35,
-        "max": 305.32,
-        "night": 299.6,
-        "eve": 301.69,
-        "morn": 299.35
-    },
-    "feels_like": {
-        "day": 306.91,
-        "night": 301.93,
-        "eve": 305.04,
-        "morn": 302.57
-    },
-    "pressure": 1011,
-    "humidity": 56,
-    "dew_point": 295.19,
-    "wind_speed": 4.09,
-    "wind_deg": 121,
-    "weather": [
-        {
-            "id": 501,
-            "main": "Rain",
-            "description": "moderate rain",
-            "icon": "10d"
-        }
-    ],
-    "clouds": 30,
-    "pop": 0.68,
-    "rain": 5.38,
-    "uvi": 13.62
+    "description": "teste",
+    "dt": 10,
+    "pressure": 10,
+    "humidity": 10,
+    "wind_speed": 10,
+    "wind_deg": 10,
+    "pop": 10,
+    "rain": 10,
+    "snow": 10,
+    "dayTemp": 10,
+    "minTemp": 10,
+    "maxTemp": 10,
+    "nightTemp": 10,
+    "dayFeel": 10,
+    "nightFeel": 10
 }

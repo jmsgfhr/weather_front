@@ -1,48 +1,38 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../../components/layout/index";
-import "../../../constants/colors.css";
-import { MeasurementsHistory } from "../../../services/index";
+import Layout from "../../components/layout/index";
+import "../../constants/colors.css";
+import { historyWeather } from "../../services/index";
 import EmptyHistory from "./components/emptyHistory/index";
 import ContentHistory from "./components/contentHistory/index";
-import LoadingHistory from "./components/loadingHistory/index";
-import FirstLogin from "../firstLogin/index";
-import SemAcesso from "../semAcesso/index";
-import { TextCard } from "../../../components/texts";
+import { TextCard } from "../../components/texts";
+import LoadingHistory from "./components/loadingHistory/index"
 
 
 const History = () => {
-  const [History, setHistory] = useState([]);
+  const [history, setHistory] = useState(null);
 
-  const user = JSON.parse(localStorage.getItem("user"));
-
-
-  // useEffect(() => {
-    
-  // }, []);
   useEffect(() => {
-    MeasurementsHistory((response) => {
-      //let graphData = response.data.user.forEach( (val) => Object.entries(val).forEach( (pair) => `${pair[0]}` in graph ? graph[`${pair[0]}`].push(pair[1]) : graph[`${pair[0]}`] = [pair[1]]) )
-      setHistory(Array.from(response.data.user.reverse()));
-    
+    historyWeather((response) => {
+      if (response)
+        setHistory(Array.from(response.data.reverse()));
     });
   }, []);
-  if (user && user.allowed !==false) {
-    return (
-      <Layout titlePage="Histórico">
-        <TextCard>Confira aqui o histórico das medidas, datas e os resultados dos exames fornecidos no formulário de medições</TextCard>
-        {History === 0 ? (
-          <LoadingHistory />
-        ) : History.length === 0 ? ( //when history is not 0 it means that there's response from server
-          <EmptyHistory />
-        ) : (
-              //if history length > 0
-              <ContentHistory History={History} />
-            )}
-      </Layout>
-    );
-  } else if (user && user.allowed === false) {
-    return <FirstLogin />;
-  } else return <SemAcesso />;
+
+  return (
+    <Layout titlePage="Histórico">
+      <TextCard>Confira aqui o histórico das pesquisas</TextCard>
+      {History === 0 ? (
+        <LoadingHistory />
+      ) : history === null ? (
+        <EmptyHistory />
+      ) : (
+            <>
+              { console.log(history)}
+              < ContentHistory HistoryWeather={history} />
+            </>
+          )}
+    </Layout>
+  );
 };
 
 export default History;

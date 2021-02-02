@@ -57,6 +57,7 @@ const ListWeather = () => {
 
   const handle = (e) => {
     if (e.key === 'Enter') {
+      e.target.value="";
       Cities(searchTerm, (response) => {
         setCityName(response.data[0].name);
         Weather(response.data[0].lat, response.data[0].lon, (resp) => {
@@ -73,7 +74,7 @@ const ListWeather = () => {
   const datePicker = (date) => {
     var a = new Date(date * 1000);
     var year = a.getFullYear();
-    var month = a.getMonth();
+    var month = a.getMonth() + 1;
     var day = a.getDate();
     return `${day}/${month}/${year}`;
   };
@@ -84,27 +85,30 @@ const ListWeather = () => {
       <SearchBar onChange={editSearchTerm} onKeyPress={handle} placeholder="Pesquisar Cidade" />
 
       {weatherList.length !== 0 ? (
-        weatherList.map((eachWeather) => (
-          < Card key={eachWeather.dt} >
-            <Text>Dia: {datePicker(eachWeather.dt)}</Text>
-            <Text>Temp min: {eachWeather.temp.min}°C</Text>
-            <Text>Temp max: {eachWeather.temp.max}°C</Text>
-            <ButtonSizeCard>
-              <ButtonPage
-                onClick={() => {
-                  console.log(eachWeather)
-                  eachWeather.city = cityName;
-                  history.push({
-                    pathname: '/detalhesTempo',
-                    state: { detail: eachWeather }
-                  })
-                }}
-              >
-                Detalhes
+        <>
+          <Text style={{ marginBottom: "25px", fontSize: "3rem" }}>{cityName}</Text>
+          {weatherList.map((eachWeather) => (
+            < Card key={eachWeather.dt} >
+              <Text>Dia: {datePicker(eachWeather.dt)}</Text>
+              <Text>Temp min: {eachWeather.temp.min}°C</Text>
+              <Text>Temp max: {eachWeather.temp.max}°C</Text>
+              <ButtonSizeCard>
+                <ButtonPage
+                  onClick={() => {
+                    eachWeather.city = cityName;
+                    history.push({
+                      pathname: '/detalhesTempo',
+                      state: { detail: eachWeather }
+                    })
+                  }}
+                >
+                  Detalhes
               </ButtonPage>
-            </ButtonSizeCard>
-          </Card>
-        ))
+              </ButtonSizeCard>
+            </Card>
+          )
+          )}
+        </>
       ) : (
           <div style={{ width: "45%" }}>
             <ButtonPage onClick={() => history.push("/historico")}>Visualizar Histórico</ButtonPage>

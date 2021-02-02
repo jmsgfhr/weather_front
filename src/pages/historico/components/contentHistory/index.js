@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import {
   ListCardContainer,
   AlignContent,
-} from "../../../../../constants/containers/index";
-import { TextCard } from "../../../../../components/texts";
+} from "../../../../constants/containers/index";
+import { TextCard } from "../../../../components/texts/index";
 import { Accordion, AccordionSummary, Typography } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import styled from "styled-components";
-import "../../../../../constants/colors.css";
-import Pagination from "../../../../../components/pagination/index";
+import "../../../../constants/colors.css";
+import Pagination from "../../../../components/pagination/index";
 
 const SizeAccordion = styled.div`
   width: 50%;
@@ -27,22 +26,9 @@ const EachElement = styled.div`
   border-bottom: 2px solid gray;
 `;
 
-const BdToDate = (dateBD) => {
-  const date = new Date(dateBD);
-  return date.toLocaleString();
-};
-
-const BdToDateElements = (dateElement) => {
-  const date = new Date(dateElement);
-  const day = String(date.getUTCDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  const fullDate = day + "/" + month + "/" + year;
-  return fullDate;
-}
 
 const ContentHistory = (props) => {
-  const vector = props.History;
+  const vector = props.HistoryWeather;
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 8;
   const lastIndex = currentPage * postPerPage;
@@ -52,7 +38,6 @@ const ContentHistory = (props) => {
 
   const paginationClick = (pg) => {
     setCurrentPage(pg);
-    
   };
 
   const arrowClick = (dir) => {
@@ -62,6 +47,15 @@ const ContentHistory = (props) => {
       setCurrentPage(currentPage + 1);
     }
   };
+
+  const datePicker = (date) => {
+    var a = new Date(date * 1000);
+    var year = a.getFullYear();
+    var month = a.getMonth() + 1;
+    var day = a.getDate();
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <React.Fragment>
       <ListCardContainer id="seuhistorico">
@@ -70,7 +64,6 @@ const ContentHistory = (props) => {
             <SizeAccordion key={eachHistory.id}>
               <Accordion>
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
@@ -81,17 +74,46 @@ const ContentHistory = (props) => {
                       fontSize: "1.5em",
                     }}
                   >
-                    {BdToDate(eachHistory.created_at)}
-                    
+                    {`${eachHistory.city} ${datePicker(eachHistory.dt)}`}
+
                   </Typography>
                 </AccordionSummary>
                 <ContentAccordion>
-                  {eachHistory.form_measurement.map((eachMeasurement)=>(
-                    <EachElement key={eachMeasurement.id}>
-                      <TextCard>{eachMeasurement.name}: {eachMeasurement.value} {eachMeasurement.unit}</TextCard>
-                      <TextCard>Data do Exame: {BdToDateElements(eachMeasurement.date)}</TextCard>
-                    </EachElement>
-                  ))}     
+                  <EachElement>
+                    <TextCard>{eachHistory.city}</TextCard>
+                  </EachElement>
+
+                  <EachElement>
+                    <TextCard>Probabilidade de Chuva: {eachHistory.pop}%</TextCard>
+                    <TextCard>{eachHistory.rain && `Quantidade de Chuva: ${eachHistory.rain} mm`}</TextCard>
+
+                    {eachHistory.snow &&
+                      <TextCard>Quantidade de Neve: {eachHistory.snow} mm</TextCard>
+                    }
+                  </EachElement>
+
+                  <EachElement>
+                    <TextCard>Temperatura Min: {eachHistory.minDayTemp}°C</TextCard>
+                    <TextCard>Temperatura Max: {eachHistory.maxDayTemp}°C</TextCard>
+                    <TextCard>Temperatura de Dia: {eachHistory.dayTemp}°C</TextCard>
+                    <TextCard>Temperatura de Noite: {eachHistory.nightTemp}°C</TextCard>
+                  </EachElement>
+
+                  <EachElement>
+                    <TextCard>Sensação Térmica de Dia: {eachHistory.dayFeel}°C</TextCard>
+                    <TextCard>Sensação Térmica de Noite: {eachHistory.nightFeel}°C</TextCard>
+                  </EachElement>
+
+                  <EachElement>
+                    <TextCard>Pressão: {eachHistory.pressure} hPa</TextCard>
+                    <TextCard>Humidade: {eachHistory.humidity}%</TextCard>
+                  </EachElement>
+
+                  <EachElement>
+                    <TextCard>Velocidade do Vento: {eachHistory.wind_speed}m/s</TextCard>
+                    <TextCard>Direção do Vento: {eachHistory.wind_deg}°</TextCard>
+                  </EachElement>
+
                 </ContentAccordion>
               </Accordion>
             </SizeAccordion>

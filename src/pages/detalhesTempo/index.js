@@ -2,6 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import Layout from "../../components/layout/index";
 import { Text } from "../../components/texts/index";
+import { historyPost } from "../../services/index"
 
 const Card = styled.div`
   background-color: var(--white);
@@ -36,18 +37,41 @@ const WeatherDetails = (props) => {
 
     const weather = props.location.state.detail;
 
+    const value = {
+        city: weather.city,
+        description: weather.weather[0].description,
+        dt: weather.dt,
+        pressure: weather.pressure,
+        humidity: weather.humidity,
+        wind_speed: weather.wind_speed,
+        wind_deg: weather.wind_deg,
+        pop: weather.pop,
+        rain: weather.rain,
+        snow: weather.snow,
+        dayTemp: weather.temp.day,
+        minDayTemp: weather.temp.min,
+        maxDayTemp: weather.temp.max,
+        nightTemp: weather.temp.night,
+        dayFeel: weather.feels_like.day,
+        nightFeel: weather.feels_like.night
+    };
+
     const datePicker = (date) => {
         var a = new Date(date * 1000);
         var year = a.getFullYear();
-        var month = a.getMonth();
+        var month = a.getMonth() + 1;
         var day = a.getDate();
         return `${day}/${month}/${year}`;
     };
 
+    historyPost(value, (resp) => {
+        console.log("ok")
+    });
+
     if (weather) {
         return (
             <Layout titlePage={`${weather.city} ${datePicker(weather.dt)}`}>
-                {console.log(weather)}
+
                 <Card>
                     <TextContainer style={{ justifyContent: "center" }}>
                         <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description} style={{ width: "150px" }} />
